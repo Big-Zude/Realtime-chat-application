@@ -15,6 +15,7 @@ const Chat = ({ location }) => {
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
         const socket = io(ENDPOINT);
+        socket.on('connection', () => console.log('connected to server'))
 
         setName(name);
         setRoom(room);
