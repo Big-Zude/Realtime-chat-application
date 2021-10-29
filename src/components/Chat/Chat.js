@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import { baseURL }  from "../../config/axiosConfig";
 import './Chat.css'
 
-let socket;
+let socket=io.connect('https://chat-zude.herokuapp.com/');
 
 const Chat = ({ location }) => {
     const [name, setName] = useState("");
@@ -14,7 +14,7 @@ const Chat = ({ location }) => {
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
-        const socket = io(ENDPOINT);
+        ///socket = io(ENDPOINT);
         socket.on('connection', () => console.log('connected to server'))
 
         setName(name);
