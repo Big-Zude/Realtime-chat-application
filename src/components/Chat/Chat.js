@@ -4,6 +4,7 @@ import queryString from "query-string";
 import io from "socket.io-client";
 import { baseURL }  from "../../config/axiosConfig";
 import './Chat.css'
+import Message from "../Message/Message";
 
 let socket=io.connect('https://chat-zude.herokuapp.com/');
 
@@ -14,8 +15,8 @@ const Chat = ({ location }) => {
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
-        ///socket = io(ENDPOINT);
-        socket.on('connection', () => console.log('connected to server'))
+        //socket = io(ENDPOINT);
+        socket.on('connect', () => console.log('connected to server'))
 
         setName(name);
         setRoom(room);
@@ -24,7 +25,7 @@ const Chat = ({ location }) => {
         console.log("zude",socket)
     },[ENDPOINT,location.search]);
     return (
-        <><h1>Chat</h1><h2>{name}</h2><h2>{room}</h2></>
+        <Message socket={socket} name={name} room={room}/>
     )
 }
 export default Chat;
